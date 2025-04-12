@@ -8,6 +8,7 @@
     import { onMount } from "svelte";
     import DnDProvider from "$lib/components/DnDProvider.svelte";
     import { colorMode } from "$lib/store";
+    import Sidebar from "$lib/components/sidebar/Sidebar.svelte";
 
     let mouseX = 0;
     let mouseY = 0;
@@ -25,6 +26,7 @@
         <DnDProvider>
             <Flow />
             <Toolbar />
+            <Sidebar />
         </DnDProvider>
     </SvelteFlowProvider>
 </div>

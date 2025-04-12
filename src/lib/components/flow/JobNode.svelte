@@ -39,7 +39,7 @@
         <!-- svelte-ignore a11y_no_static_element_interactions -->
         <span on:dblclick={(e) => editContent(e.target)}>{data.name}</span>
     </div>
-    <hr />
+    <!-- <hr /> -->
 </div>
 
 <style>
@@ -51,7 +51,7 @@
 
         display: flex;
         flex-direction: column;
-        justify-content: start;
+        justify-content: center;
         align-items: center;
         border-radius: 3px;
         width: 200px;
