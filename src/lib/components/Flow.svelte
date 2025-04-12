@@ -61,6 +61,7 @@
                 n.data = {
                     ...n.data,
                     children: [...(n.data.children ?? []), ...targets.map(([t, _]) => ({ id: t.id, data: t.data }))],
+                    intersecting: false,
                 };
                 
                 deleteNodes(targets.map(([t, _]) => t.id));

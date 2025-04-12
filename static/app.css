@@ -24,6 +24,7 @@ hr {
     position: relative;
     background-image: linear-gradient(90deg, transparent, var(--hr-color, var(--color, #FFF)) 15%, var(--hr-color, var(--color, #FFF)) 85%, transparent);
     height: 1px;
+    min-height: 1px;
     outline: 0;
     border: 0;
     margin: 0.2em 0;
