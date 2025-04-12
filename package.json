@@ -1,0 +1,14 @@
+{
+    "name": "cisketch",
+    "version": "1.0.0",
+    "description": "A visual CI/CD pipeline builder",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no tests specified. Maybe you could make one?\""
+    },
+    "keywords": [],
+    "author": "TheBrenny <iam@justbrenny.me>",
+    "license": "MIT",
+    "type": "module",
+    "private": true
+}
