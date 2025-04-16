@@ -1,11 +1,10 @@
 <script>
+    import Details from "./Details.svelte";
+
     export let node;
+    export let open = true;
 </script>
 
-<div class="">
-    {node.type}
-    {node.id}
-</div>
-
-<style>
-</style>
+<Details {node} {open}>
+    ID: {node.id}
+</Details>
