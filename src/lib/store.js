@@ -1,10 +1,18 @@
 import {getContext} from "svelte";
-import {derived, get, writable} from "svelte/store";
+import {get, writable} from "svelte/store";
 import JobNode from "./components/flow/JobNode.svelte";
 import StageNode from "./components/flow/StageNode.svelte";
 
+let cm = localStorage.getItem("colorMode");
+if(cm !== "light" && cm !== "dark") {
+    if(window.matchMedia("(prefers-color-scheme: dark)").matches) cm = "dark";
+    else cm = "light";
+}
+
 /** @type {import("svelte/store").Writable<import("@xyflow/svelte").ColorMode>} */
-export const colorMode = writable("light");
+// @ts-ignore -- We know it's a ColorMode type, look above
+export const colorMode = writable(cm);
+colorMode.subscribe((cm) => localStorage.setItem("colorMode", cm));
 
 /** @param {import("svelte/store").Writable<import("@xyflow/svelte").NodeProps[]>} node */
 export const nodes = writable([]);
