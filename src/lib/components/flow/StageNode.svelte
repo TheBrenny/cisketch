@@ -181,7 +181,7 @@
         opacity: 1;
     }
 
-    :global(.wrapper.dark) .block .placeholder {
+    :global(.app.dark) .block .placeholder {
         color: #000088;
         background: #6666ff66;
         border: #000088aa 3px dashed;

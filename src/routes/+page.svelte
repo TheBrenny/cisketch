@@ -5,34 +5,20 @@
     import Flow from "$lib/components/Flow.svelte";
     import Toolbar from "$lib/components/Toolbar.svelte";
 
-    import { onMount } from "svelte";
-    import DnDProvider from "$lib/components/DnDProvider.svelte";
     import { colorMode } from "$lib/store";
     import Sidebar from "$lib/components/sidebar/Sidebar.svelte";
-
-    let mouseX = 0;
-    let mouseY = 0;
-
-    onMount(() => {
-        document.addEventListener("mousemove", (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-        });
-    });
 </script>
 
-<div class="wrapper {$colorMode}">
+<div class="app {$colorMode}">
     <SvelteFlowProvider>
-        <DnDProvider>
-            <Flow />
-            <Toolbar />
-            <Sidebar />
-        </DnDProvider>
+        <Flow />
+        <Toolbar />
+        <Sidebar />
     </SvelteFlowProvider>
 </div>
 
 <style>
-    .wrapper {
+    .app {
         --color: #000;
         --background: #ddd;
 
@@ -41,7 +27,7 @@
         width: 100%;
         height: 100%;
     }
-    .wrapper.dark {
+    .app.dark {
         --color: #fff;
         --background: #333;
     }

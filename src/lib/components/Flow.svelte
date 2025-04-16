@@ -1,12 +1,13 @@
 <script>
-    import { colorMode, useDnD, nodeTypes, nodes, edges, addJobNode, deleteNodes } from "$lib/store";
+    import { colorMode, nodeTypes, nodes, edges, addJobNode, deleteNodes } from "$lib/store";
+    import { dndType } from "$lib/dragAndDrop";
     import { Background, BackgroundVariant, MiniMap, SvelteFlow, useSvelteFlow } from "@xyflow/svelte";
 
     /** @type {[number,number]} */
     const snapGrid = [10, 10];
 
     const { screenToFlowPosition, getIntersectingNodes, deleteElements } = useSvelteFlow();
-    const type = useDnD();
+    // const dndType = useDnD();
 
     /** @param {DragEvent} e */
     function onDragOver(e) {
@@ -17,10 +18,10 @@
     /** @param {DragEvent} e */
     function onDrop(e) {
         e.preventDefault();
-        if (!$type) return;
+        if (!$dndType) return;
 
         const position = screenToFlowPosition({ x: e.clientX, y: e.clientY });
-        addJobNode({ id: `${Date.now()}`, type: $type, position, data: { name: "Humble " + $type } });
+        addJobNode({ id: `${Date.now()}`, type: $dndType, position, data: { name: "Humble " + $dndType } });
     }
 
     /** @param {CustomEvent<{targetNode: any, nodes: any[], event: MouseEvent|TouchEvent}>} e */

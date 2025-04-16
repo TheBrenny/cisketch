@@ -18,10 +18,6 @@ colorMode.subscribe((cm) => localStorage.setItem("colorMode", cm));
 export const nodes = writable([]);
 export const edges = writable([]);
 
-export const useDnD = () => {
-    return getContext("dnd");
-}
-
 /** @type {Object<string,any>} */
 export const nodeTypes = {
     job: JobNode,

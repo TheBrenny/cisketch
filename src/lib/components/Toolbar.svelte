@@ -1,13 +1,12 @@
 <script>
-    import { colorMode, useDnD, addJobNode } from "$lib/store.js";
+    import { dndType } from "$lib/dragAndDrop";
+    import { colorMode, addJobNode } from "$lib/store.js";
     import { useStore, useSvelteFlow } from "@xyflow/svelte";
     import { onMount } from "svelte";
 
     const { zoomIn, zoomOut, fitView, nodesDraggable, nodesConnectable, elementsSelectable } = useStore();
     const { screenToFlowPosition } = useSvelteFlow();
     const viewportMoveSpeed = 250;
-
-    const type = useDnD();
 
     const flowControl = {
         switchColorMode: () => {
@@ -43,7 +42,7 @@
     function onDragStart(event, nodeType) {
         if (!event.dataTransfer) return null;
 
-        type.set(nodeType);
+        dndType.set(nodeType);
         event.dataTransfer.effectAllowed = "move";
     }
 
