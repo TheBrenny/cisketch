@@ -1,12 +1,19 @@
 <script>
     import { nodes } from "$lib/store";
+    import { onMount } from "svelte";
     import JobDetails from "./JobDetails.svelte";
     import StageDetails from "./StageDetails.svelte";
 
     export let open = false;
+
+    onMount(() => {
+        document.addEventListener("keydown", (e) => {
+            if (e.key == "d") open = !open;
+        });
+    });
 </script>
 
-<div class="wrapper" class:open>
+<div class="sidebar" class:open>
     <!-- svelte-ignore a11y_no_static_element_interactions -->
     <!-- svelte-ignore a11y_click_events_have_key_events -->
     <div class="tab" on:click={() => (open = !open)}>
@@ -15,40 +22,45 @@
     <div class="panel">
         {#each $nodes.filter((n) => n.selected) as node (node.id)}
             <!-- content here -->
-            {#if node.data.type == "stage"}
-                <StageDetails node={node.data} />
+            {#if node.type == "stage"}
+                <StageDetails {node} />
             {:else}
-                <JobDetails node={node.data} />
+                <JobDetails {node} />
             {/if}
         {:else}
-            <i>Nothing's here...</i>
+            <i>Nothing has been selected...</i>
         {/each}
     </div>
 </div>
 
 <style>
-    .wrapper {
+    .sidebar {
         --gutter-size: 15px;
-        --panel-size: 300px;
-        --tab-button-size: 30px;
+        --panel-size: 370px;
+        --tab-button-size: 32px;
 
         top: var(--gutter-size);
         right: calc(0px - var(--panel-size));
-        min-height: calc(var(--tab-button-size) * 2);
-        max-height: calc(100% - var(--gutter-size) * 2);
+        /* overflow: auto; */
         width: calc(var(--panel-size) + var(--tab-button-size));
         position: fixed;
-        transition: right 0.2s ease;
+        transition:
+            right 0.2s ease,
+            opacity 0.2s ease;
+        filter: drop-shadow(0px 0px 7px 0px rgba(0, 0, 0, 0.75));
+        opacity: 0.7;
     }
-    .wrapper.open {
+    .sidebar:hover {
+        opacity: 1;
+    }
+    .sidebar.open {
         right: var(--gutter-size);
     }
-    .wrapper .panel {
+    .sidebar > .panel {
         background: #457;
         top: 0;
         left: var(--tab-button-size);
         position: absolute;
-        height: 100%;
         width: var(--panel-size);
         display: flex;
         flex-direction: column;
@@ -57,29 +69,31 @@
         gap: 5px;
         padding: 5px;
         border-radius: 0px 5px 5px 5px;
+        min-height: calc(var(--tab-button-size));
+        max-height: calc(100vh - var(--gutter-size) * 2);
     }
-    .wrapper .tab {
-        height: var(--tab-button-size);
-        width: calc(var(--tab-button-size) + 1px); /* add 1px because of a weird rendering thing */
+    .sidebar > .tab {
+        height: calc(var(--tab-button-size));
+        width: calc(var(--tab-button-size) + 10px); /* add 10px to hide the border radius of the panel*/
         background: linear-gradient(to right, #457 0%, #457 50%, #457);
         transition: background 0.2s ease;
         border-radius: 3px 0px 0px 3px;
         border: none;
         color: white;
         cursor: pointer;
-        text-align: center;
-        line-height: var(--tab-button-size);
+        text-align: left;
+        line-height: calc(var(--tab-button-size) + 2px);
     }
-    .wrapper .tab:hover {
+    .sidebar > .tab:hover {
         background: linear-gradient(to right, #568 0%, #568 50%, #457);
     }
-    .wrapper .tab:active {
+    .sidebar > .tab:active {
         background: linear-gradient(to right, #346 0%, #346 50%, #457);
     }
-    .wrapper .tab span {
+    .sidebar > .tab > span {
         text-align: center;
-        line-height: var(--toolbar-button-size);
-        width: var(--toolbar-button-size);
-        font-size: calc(var(--toolbar-button-size) - 10px);
+        line-height: var(--tab-button-size);
+        width: var(--tab-button-size);
+        font-size: calc(var(--tab-button-size) - 13px);
     }
 </style>

@@ -121,7 +121,7 @@
 
 <style>
     .toolbar {
-        --hr-color: #FFF;
+        --hr-color: #fff;
         --toolbar-size: 40px;
         --toolbar-padding: 5px;
         --toolbar-button-size: calc(var(--toolbar-size) - var(--toolbar-padding) * 2);
@@ -136,7 +136,7 @@
         box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.75);
         color: white;
         padding: 5px;
-        opacity: 0.85;
+        opacity: 0.7;
         transition: opacity 0.2s ease;
     }
 
